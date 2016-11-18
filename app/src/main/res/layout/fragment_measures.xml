@@ -3,13 +3,70 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Mesures piscines"
-        android:id="@+id/date_output"
+        android:text="date"
+        android:id="@+id/ph_date_output"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:text="measure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ph_measure_output"
+            android:layout_above="@+id/chlore_date_output"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="27dp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Button
+            android:text="Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="49dp"
+            android:id="@+id/ph_button"
+            android:layout_below="@+id/chlore_date_output"
+            android:layout_alignRight="@+id/measure_output"
+            android:layout_alignEnd="@+id/measure_output" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="chlore_date"
+            android:id="@+id/chlore_date_output"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp" />
+
+        <TextView
+            android:text="measure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/chlore_measure_output"
+            android:layout_above="@+id/chlore_date_output"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="27dp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Button
+            android:text="Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="49dp"
+            android:id="@+id/chlore_button"
+            android:layout_below="@+id/chlore_date_output"/>
+    </LinearLayout>
 
 </RelativeLayout>

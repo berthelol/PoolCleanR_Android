@@ -1,4 +1,6 @@
 package com.bigot.alexandre.poolcleanr_android;
+import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -6,16 +8,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
+
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.Utils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-public class Historique extends Fragment {
 
+public class Historique extends Fragment {
+    protected LineChart mChart;
 
     @Nullable
     @Override
@@ -32,35 +42,185 @@ public class Historique extends Fragment {
         //you can set the title for your toolbar here for different fragments different titles
         getActivity().setTitle("Historique");
 
-        final TextView mesure_output =(TextView) getView().findViewById(R.id.measure_output);
-        final TextView date_output = (TextView) getView().findViewById(R.id.date_output);
-        Button button=(Button) getView().findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Test_connectivity task = new Test_connectivity();
-                task.execute("http://loicberthelot.freeboxos.fr/device/pH/");
-                try {
-                    //get when the request is finished
-                    String response = task.get();
-                    Log.i("Content",response);
+        this.createchart();
+    }
 
-                    JSONArray json = new JSONArray(response);
-                    String mesure = json.getJSONObject(0).getString("mesure");
-                    String date =json.getJSONObject(0).getString("time_of_mesure");
+    public void createchart()
+    {
+        mChart = (LineChart) getView().findViewById(R.id.chart1);
+        //mChart.setOnChartGestureListener(this);
+       // mChart.setOnChartValueSelectedListener(this);
+        mChart.setDrawGridBackground(false);
 
-                    mesure_output.setText(mesure.toString());
-                    date_output.setText(date.toString());
+        // no description text
+        mChart.getDescription().setEnabled(false);
 
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+        // enable touch gestures
+        mChart.setTouchEnabled(true);
+
+        // enable scaling and dragging
+        mChart.setDragEnabled(true);
+        mChart.setScaleEnabled(true);
+        // mChart.setScaleXEnabled(true);
+        // mChart.setScaleYEnabled(true);
+
+        // if disabled, scaling can be done on x- and y-axis separately
+        mChart.setPinchZoom(true);
+
+        // set an alternative background color
+        // mChart.setBackgroundColor(Color.GRAY);
+
+        // create a custom MarkerView (extend MarkerView) and specify the layout
+        // to use for it
+        //MyMarkerView mv = new MyMarkerView(this, R.layout.custom_marker_view);
+        //mv.setChartView(mChart); // For bounds control
+        //mChart.setMarker(mv); // Set the marker to the chart
+
+        // x-axis limit line
+       /* LimitLine llXAxis = new LimitLine(10f, "Index 10");
+        llXAxis.setLineWidth(4f);
+        llXAxis.enableDashedLine(10f, 10f, 0f);
+        llXAxis.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_BOTTOM);
+        llXAxis.setTextSize(10f);*/
+
+       // XAxis xAxis = mChart.getXAxis();
+       // xAxis.enableGridDashedLine(10f, 10f, 0f);
+        //xAxis.setValueFormatter(new MyCustomXAxisValueFormatter());
+        //xAxis.addLimitLine(llXAxis); // add x-axis limit line
+
+
+
+
+       /* YAxis leftAxis = mChart.getAxisLeft();
+        leftAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
+        leftAxis.addLimitLine(ll1);
+        leftAxis.addLimitLine(ll2);
+        leftAxis.setAxisMaximum(200f);
+        leftAxis.setAxisMinimum(-50f);
+        //leftAxis.setYOffset(20f);
+        leftAxis.enableGridDashedLine(10f, 10f, 0f);
+        leftAxis.setDrawZeroLine(false);*/
+
+        // limit lines are drawn behind data (and not on top)
+        //leftAxis.setDrawLimitLinesBehindData(true);
+
+        mChart.getAxisRight().setEnabled(false);
+
+        //mChart.getViewPortHandler().setMaximumScaleY(2f);
+        //mChart.getViewPortHandler().setMaximumScaleX(2f);
+
+        // add data
+        setData();
+
+//        mChart.setVisibleXRange(20);
+//        mChart.setVisibleYRange(20f, AxisDependency.LEFT);
+//        mChart.centerViewTo(20, 50, AxisDependency.LEFT);
+
+        mChart.animateX(2500);
+        //mChart.invalidate();
+
+        // get the legend (only possible after setting data)
+        Legend l = mChart.getLegend();
+
+        // modify the legend ...
+        l.setForm(Legend.LegendForm.LINE);
+
+         // dont forget to refresh the drawing
+        // mChart.invalidate();
+    }
+    private void setData() {
+
+        ArrayList<Entry> values = new ArrayList<Entry>();
+        values= this.askforpHhistory();
+
+        /*for (int i = 0; i < count; i++) {
+
+            float val = (float) (Math.random() * range);
+
+            values.add(new Entry(i, val));
+        }*/
+
+        LineDataSet set1;
+
+        if (mChart.getData() != null &&
+                mChart.getData().getDataSetCount() > 0) {
+            set1 = (LineDataSet)mChart.getData().getDataSetByIndex(0);
+            set1.setValues(values);
+            mChart.getData().notifyDataChanged();
+            mChart.notifyDataSetChanged();
+        } else {
+            // create a dataset and give it a type
+            set1 = new LineDataSet(values, "pH");
+
+            // set the line to be drawn like this "- - - - - -"
+            set1.enableDashedLine(10f, 5f, 0f);
+            set1.enableDashedHighlightLine(10f, 5f, 0f);
+            set1.setColor(Color.BLACK);
+            set1.setCircleColor(Color.BLACK);
+            set1.setLineWidth(1f);
+            set1.setCircleRadius(3f);
+            set1.setDrawCircleHole(false);
+            set1.setValueTextSize(9f);
+            set1.setDrawFilled(true);
+            set1.setFormLineWidth(1f);
+            set1.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f));
+            set1.setFormSize(15.f);
+
+            if (Utils.getSDKInt() >= 18) {
+                // fill drawable only supported on api level 18 and above
+                //Drawable drawable = ContextCompat.getDrawable(this, R.drawable.fade_red);
+                //set1.setFillDrawable(drawable);
             }
-        });
+            else {
+                set1.setFillColor(Color.BLACK);
+            }
+
+            ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
+            dataSets.add(set1); // add the datasets
+
+            // create a data object with the datasets
+            LineData data = new LineData(dataSets);
+
+            // set data
+            mChart.setData(data);
+        }
+    }
+    public ArrayList<Entry> askforpHhistory()
+    {
+        ArrayList<Entry> values = new ArrayList<Entry>();
+        Test_connectivity task = new Test_connectivity();
+        task.execute("http://loicberthelot.freeboxos.fr/device/pH/historique");
+        try {
+            //get when the request is finished
+            String response = task.get();
+            Log.i("Content",response);
+
+            JSONArray json = new JSONArray(response);
+            Log.i("lenght:",String.valueOf(json.length()));
+            for(int i=0;i<json.length();i++)
+            {
+                values.add(new Entry(i,json.getJSONObject(i).getInt("mesure")));
+            }
+
+            //String mesure = json.getJSONObject(0).getString("mesure");
+           // String date =json.getJSONObject(0).getString("time_of_mesure");
+
+           // mesure_output.setText(mesure.toString());
+           // date_output.setText(date.toString());
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return values;
+    }
+
+    public void sync()
+    {
+Log.i("Sync","clicked!!");
     }
 
 

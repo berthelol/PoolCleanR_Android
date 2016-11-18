@@ -3,33 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/date_output"
-        android:layout_alignLeft="@+id/date_output"
-        android:layout_alignStart="@+id/date_output"
-        android:layout_marginTop="49dp"
-        android:id="@+id/button" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="date"
-        android:id="@+id/date_output"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:text="measure"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/measure_output"
-        android:layout_above="@+id/date_output"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="27dp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>
