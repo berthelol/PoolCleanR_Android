@@ -4,9 +4,11 @@ package com.bigot.alexandre.poolcleanr_android;
  * Created by AlexandreBigot on 04/11/2016.
  */
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.android.volley.*;
 import com.android.volley.toolbox.*;
@@ -17,16 +19,19 @@ import org.json.JSONObject;
 public class Connectivity extends AppCompatActivity {
 
     public static final String TAG = "Connectivity";
+
+    public String jsonvalue;
     private Context context;
 
     // Constructor
     public Connectivity(final Context context) {
         this.context = context;
+        jsonvalue="";
     }
 
     // JSON Request
     public void getJSONRequest() {
-
+        //WTF ?
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = "http://httpbin.org/get?site=code&network=tutsplus";
 
@@ -59,15 +64,16 @@ public class Connectivity extends AppCompatActivity {
     public void getStringRequest() {
 
         RequestQueue queue = Volley.newRequestQueue(context);
-        String url ="http://loicberthelot.freeboxos.fr/device/bigot/deded";
+        String url ="http://loicberthelot.freeboxos.fr/device/pH/";
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Display the first characters of the response string (exact size ??)
-                        Log.i(TAG, "Response is: "+ response.substring(0,17));
+                        // Display the response
+                        //Log.i(TAG, "Response is: "+ response);
+                        storedata(response);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -75,9 +81,14 @@ public class Connectivity extends AppCompatActivity {
                 Log.e(TAG, "That didn't work!");
             }
         });
-
         queue.add(stringRequest);
+
     }
 
+    public void storedata (String data)
+    {
+        Log.i("from storedata:","data:"+data);
+        this.jsonvalue=data;
+    }
 
 }

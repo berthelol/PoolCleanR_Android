@@ -15,8 +15,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.concurrent.ExecutionException;
 
 import static android.R.attr.id;
+import static android.R.attr.textColorTertiary;
+import static android.support.v7.widget.AppCompatDrawableManager.get;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -43,7 +49,9 @@ public class MainActivity extends AppCompatActivity
         //add this line to display menu1 when the activity is loaded
         displaySelectedScreen(R.id.nav_measures);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,7 +60,7 @@ public class MainActivity extends AppCompatActivity
                 connex.getJSONRequest();
                 connex.getStringRequest();
             }
-        });
+        });*/
     }
 
     @Override
@@ -80,7 +88,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.sync) {
             return true;
         }
 
