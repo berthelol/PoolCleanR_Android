@@ -1,72 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <TextView
+        android:text="Temp (°C)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/temp_text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textSize="25sp"
+        android:layout_marginTop="100dp"
+        android:layout_below="@+id/chlore_text"
+        android:layout_alignLeft="@+id/chlore_text"
+        android:layout_alignStart="@+id/chlore_text" />
+
+    <TextView
+        android:text="pH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:id="@+id/ph_text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textSize="25sp"
+        android:layout_marginLeft="20dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true" />
 
-        <TextView
-        android:layout_width="match_parent"
+    <ImageView
+        android:layout_width="60px"
+        android:layout_height="60px"
+        app:srcCompat="@drawable/info_icon"
+        android:id="@+id/icon_info_temp"
+        android:layout_alignBottom="@+id/temp_text"
+        android:layout_alignLeft="@+id/icon_info_chlore"
+        android:layout_alignStart="@+id/icon_info_chlore" />
+
+    <TextView
+        android:text="relevé fait le :"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="date"
-        android:id="@+id/ph_date_output"
-        android:layout_centerVertical="true"
+        android:id="@+id/mesure_date"
+        android:textAlignment="center"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="12dp"
+        android:gravity="bottom"/>
+
+    <TextView
+        android:text="Chlore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/chlore_text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textSize="25sp"
+        android:layout_marginTop="53dp"
+        android:layout_below="@+id/output_ph"
+        android:layout_alignLeft="@+id/ph_text" />
+
+    <ImageView
+        android:layout_width="60px"
+        android:layout_height="60px"
+        app:srcCompat="@drawable/info_icon"
+        android:id="@+id/icon_info_chlore"
+        android:layout_above="@+id/output_chlore"
+        android:layout_alignLeft="@+id/icon_info_ph"
+        android:layout_alignStart="@+id/icon_info_ph" />
+
+    <Button
+        android:text="Effectuer un relevé"
+        android:id="@+id/mesure_btn"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:elevation="10dp"
+        android:layout_marginBottom="16dp"
+        android:layout_above="@+id/mesure_date"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center" />
+
+    <TextView
+        android:text="Valeur non disponible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:id="@+id/output_ph"
+        android:layout_below="@+id/ph_text"
+        android:layout_alignLeft="@+id/output_temp"
+        android:layout_alignStart="@+id/output_temp" />
+
+    <ImageView
+        android:layout_width="60px"
+        android:layout_height="60px"
+        app:srcCompat="@drawable/info_icon"
+        android:id="@+id/icon_info_ph"
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_above="@+id/output_ph"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Valeur non disponible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:id="@+id/output_temp"
+        android:layout_below="@+id/temp_text"
         android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:text="measure"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/ph_measure_output"
-            android:layout_above="@+id/chlore_date_output"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="27dp"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <Button
-            android:text="Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="49dp"
-            android:id="@+id/ph_button"
-            android:layout_below="@+id/chlore_date_output"
-            android:layout_alignRight="@+id/measure_output"
-            android:layout_alignEnd="@+id/measure_output" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="chlore_date"
-            android:id="@+id/chlore_date_output"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="60dp" />
-
-        <TextView
-            android:text="measure"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/chlore_measure_output"
-            android:layout_above="@+id/chlore_date_output"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="27dp"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <Button
-            android:text="Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="49dp"
-            android:id="@+id/chlore_button"
-            android:layout_below="@+id/chlore_date_output"/>
-    </LinearLayout>
+    <TextView
+        android:text="Valeur non disponible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:id="@+id/output_chlore"
+        android:layout_below="@+id/chlore_text"
+        android:layout_alignLeft="@+id/output_ph"
+        android:layout_alignStart="@+id/output_ph" />
 
 </RelativeLayout>
