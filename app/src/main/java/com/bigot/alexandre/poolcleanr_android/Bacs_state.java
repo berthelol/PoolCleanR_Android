@@ -1,7 +1,9 @@
 package com.bigot.alexandre.poolcleanr_android;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +45,72 @@ public class Bacs_state extends Fragment {
             public void onClick(View v) {
                 Toast toast = Toast.makeText(getContext(), "Test Test", Toast.LENGTH_SHORT);
                 toast.show();
+            }
+        });
+
+        // Open the bacs
+        Button open_ph = (Button) getView().findViewById(R.id.ph_bac_btn);
+        open_ph.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final CharSequence[] items = {"pH -", "pH +"};
+
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Bac de pH")
+                        //.setMessage("Souhaitez-vous ouvrir le bac de pH ?")
+                        .setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                Toast toast = Toast.makeText(getContext(), items[arg1], Toast.LENGTH_LONG);
+                                toast.show();
+                            }
+                        })
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Demande d'ouverture du bac de pH à la Raspberry
+                                // La quantité nécessaire pour un retour à la normale doit être calculé (côté Raspberry ?)
+                                int selected = ((AlertDialog)dialog).getListView().getSelectedItemPosition();
+                                Toast toast = Toast.makeText(getContext(), "Selectionnné : " + selected, Toast.LENGTH_LONG);
+                                toast.show();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Do nothing
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_info)
+                        .show();
+
+                //Recalculate the level of the bacs
+                getLevelBac();
+            }
+        });
+
+        Button open_chlore = (Button) getView().findViewById(R.id.chlore_bac_btn);
+        open_chlore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Bac de Chlore")
+                        .setMessage("Souhaitez-vous ouvrir le bac de chlore ?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Demande d'ouverture du bac de Chlore
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Do nothing
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_info)
+                        .show();
+
+                //Recalculate the level of the bacs
+                getLevelBac();
             }
         });
 
