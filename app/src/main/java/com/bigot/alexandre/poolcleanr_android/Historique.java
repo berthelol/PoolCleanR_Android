@@ -131,7 +131,7 @@ public class Historique extends Fragment {
     private void setData() {
 
         ArrayList<Entry> values = new ArrayList<Entry>();
-        values= this.askforpHhistory();
+        values= this.askFor_pHHistory();
 
         /*for (int i = 0; i < count; i++) {
 
@@ -185,7 +185,7 @@ public class Historique extends Fragment {
             mChart.setData(data);
         }
     }
-    public ArrayList<Entry> askforpHhistory()
+    public ArrayList<Entry> askFor_pHHistory()
     {
         ArrayList<Entry> values = new ArrayList<Entry>();
         Test_connectivity task = new Test_connectivity();
@@ -218,9 +218,42 @@ public class Historique extends Fragment {
         return values;
     }
 
+    public ArrayList<Entry> askFor_ChloreHistory()
+    {
+        ArrayList<Entry> values = new ArrayList<Entry>();
+        Test_connectivity task = new Test_connectivity();
+        task.execute("http://loicberthelot.freeboxos.fr/device/chlore/historique");
+        try {
+            //get when the request is finished
+            String response = task.get();
+            Log.i("Content",response);
+
+            JSONArray json = new JSONArray(response);
+            Log.i("lenght:",String.valueOf(json.length()));
+            for(int i=0;i<json.length();i++)
+            {
+                values.add(new Entry(i,json.getJSONObject(i).getInt("mesure")));
+            }
+
+            //String mesure = json.getJSONObject(0).getString("mesure");
+            // String date =json.getJSONObject(0).getString("time_of_mesure");
+
+            // mesure_output.setText(mesure.toString());
+            // date_output.setText(date.toString());
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return values;
+    }
+
     public void sync()
     {
-Log.i("Sync","clicked!!");
+        Log.i("Sync","clicked!!");
     }
 
 

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.concurrent.ExecutionException;
 
@@ -100,9 +101,9 @@ public class Mesure extends Fragment {
             String response = task_ph.get();
             Log.i("Content",response);
 
-            JSONArray json = new JSONArray(response);
-            String ph_mesure = json.getJSONObject(0).getString("mesure");
-            String date = json.getJSONObject(0).getString("time_of_mesure");
+            JSONObject json = new JSONObject(response);
+            String ph_mesure = json.getString("mesure");
+            String date = json.getString("time_of_mesure");
 
             ph_output.setText(ph_mesure.toString());
             date_output.setText("relevé fait le : " + date.toString());
@@ -122,9 +123,9 @@ public class Mesure extends Fragment {
             String response = task_chlore.get();
             Log.i("Content",response);
 
-            JSONArray json = new JSONArray(response);
-            String chlore_mesure = json.getJSONObject(0).getString("mesure");
-            //String date = json.getJSONObject(0).getString("time_of_mesure");
+            JSONObject json = new JSONObject(response);
+            String chlore_mesure = json.getString("mesure");
+            //String date = json.getString("time_of_mesure");
 
             chlore_output.setText(chlore_mesure.toString());
             //date_output.setText("relevé fait le : " + date.toString());
@@ -144,8 +145,8 @@ public class Mesure extends Fragment {
             String response = task_temp.get();
             Log.i("Content",response);
 
-            JSONArray json = new JSONArray(response);
-            String temp_mesure = json.getJSONObject(0).getString("mesure");
+            JSONObject json = new JSONObject(response);
+            String temp_mesure = json.getString("mesure");
 
             temp_output.setText(temp_mesure.toString());
 
