@@ -23,6 +23,8 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import static android.R.attr.id;
+
 
 public class Historique extends Fragment {
     protected LineChart mChart;
@@ -42,12 +44,14 @@ public class Historique extends Fragment {
         //you can set the title for your toolbar here for different fragments different titles
         getActivity().setTitle("Historique");
 
-        this.createchart();
+        this.createchart(R.id.graph_pH);
+        this.createchart(R.id.graph_chlore);
+        this.createchart(R.id.graph_temp);
     }
 
-    public void createchart()
+    public void createchart(int id)
     {
-        mChart = (LineChart) getView().findViewById(R.id.chart1);
+        mChart = (LineChart) getView().findViewById(id);
         //mChart.setOnChartGestureListener(this);
        // mChart.setOnChartValueSelectedListener(this);
         mChart.setDrawGridBackground(false);
@@ -110,7 +114,7 @@ public class Historique extends Fragment {
         //mChart.getViewPortHandler().setMaximumScaleX(2f);
 
         // add data
-        setData();
+        setData(id);
 
 //        mChart.setVisibleXRange(20);
 //        mChart.setVisibleYRange(20f, AxisDependency.LEFT);
@@ -128,17 +132,28 @@ public class Historique extends Fragment {
          // dont forget to refresh the drawing
         // mChart.invalidate();
     }
-    private void setData() {
+    private void setData(int id) {
 
         ArrayList<Entry> values = new ArrayList<Entry>();
-        values= this.askFor_pHHistory();
-
-        /*for (int i = 0; i < count; i++) {
-
-            float val = (float) (Math.random() * range);
-
-            values.add(new Entry(i, val));
-        }*/
+        String label;
+        switch (id)
+        {
+            case R.id.graph_pH:
+                values= this.askForHistory(id);
+                label="pH";
+                break;
+            case R.id.graph_chlore:
+                values= this.askForHistory(id);
+                label="chlore";
+                break;
+            case R.id.graph_temp:
+                values= this.askForHistory(id);
+                label="temperature";
+                break;
+            default:
+                values= this.askForHistory(id);
+                label="unknowned";
+        }
 
         LineDataSet set1;
 
@@ -150,7 +165,7 @@ public class Historique extends Fragment {
             mChart.notifyDataSetChanged();
         } else {
             // create a dataset and give it a type
-            set1 = new LineDataSet(values, "pH");
+            set1 = new LineDataSet(values, label);
 
             // set the line to be drawn like this "- - - - - -"
             set1.enableDashedLine(10f, 5f, 0f);
@@ -185,11 +200,27 @@ public class Historique extends Fragment {
             mChart.setData(data);
         }
     }
-    public ArrayList<Entry> askFor_pHHistory()
+    public ArrayList<Entry> askForHistory(int id)
     {
+        String url =   "http://loicberthelot.freeboxos.fr/device/";
+        switch (id)
+        {
+            case R.id.graph_pH:
+                url = url +"pH/historique";
+                break;
+            case R.id.graph_chlore:
+                url = url +"chlore/historique";
+                break;
+            case R.id.graph_temp:
+                url = url +"temperature/historique";
+                break;
+            default:
+                url = url +"pH/historique";
+        }
+        Log.i("Request to:",url);
         ArrayList<Entry> values = new ArrayList<Entry>();
         Test_connectivity task = new Test_connectivity();
-        task.execute("http://loicberthelot.freeboxos.fr/device/pH/historique");
+        task.execute(url);
         try {
             //get when the request is finished
             String response = task.get();
@@ -207,39 +238,6 @@ public class Historique extends Fragment {
 
            // mesure_output.setText(mesure.toString());
            // date_output.setText(date.toString());
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return values;
-    }
-
-    public ArrayList<Entry> askFor_ChloreHistory()
-    {
-        ArrayList<Entry> values = new ArrayList<Entry>();
-        Test_connectivity task = new Test_connectivity();
-        task.execute("http://loicberthelot.freeboxos.fr/device/chlore/historique");
-        try {
-            //get when the request is finished
-            String response = task.get();
-            Log.i("Content",response);
-
-            JSONArray json = new JSONArray(response);
-            Log.i("lenght:",String.valueOf(json.length()));
-            for(int i=0;i<json.length();i++)
-            {
-                values.add(new Entry(i,json.getJSONObject(i).getInt("mesure")));
-            }
-
-            //String mesure = json.getJSONObject(0).getString("mesure");
-            // String date =json.getJSONObject(0).getString("time_of_mesure");
-
-            // mesure_output.setText(mesure.toString());
-            // date_output.setText(date.toString());
 
         } catch (InterruptedException e) {
             e.printStackTrace();

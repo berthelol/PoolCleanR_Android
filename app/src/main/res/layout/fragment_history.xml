@@ -3,9 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/chart1"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:weightSum="1">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/graph_pH"
+            android:layout_width="match_parent"
+            android:layout_height="163dp" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/graph_chlore"
+            android:layout_width="match_parent"
+            android:layout_height="164dp"/>
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/graph_temp"
+            android:layout_width="match_parent"
+            android:layout_height="169dp"/>
+    </LinearLayout>
 
 </RelativeLayout>
