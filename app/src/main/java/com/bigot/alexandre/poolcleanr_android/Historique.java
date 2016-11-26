@@ -220,7 +220,7 @@ public class Historique extends Fragment {
         Log.i("Request to:",url);
         ArrayList<Entry> values = new ArrayList<Entry>();
         Test_connectivity task = new Test_connectivity();
-        task.execute(url);
+        task.execute(url,"GET");
         try {
             //get when the request is finished
             String response = task.get();

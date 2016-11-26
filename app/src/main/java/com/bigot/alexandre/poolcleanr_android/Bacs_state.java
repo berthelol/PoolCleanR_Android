@@ -133,7 +133,7 @@ public class Bacs_state extends Fragment {
         Test_connectivity task_chlore = new Test_connectivity();
 
         // Relative to pH Moins, pH Plus and date
-        task_ph.execute("http://loicberthelot.freeboxos.fr/device/pH/");
+        task_ph.execute("http://loicberthelot.freeboxos.fr/device/pH/","GET");
         try {
             //get when the request is finished
             String response = task_ph.get();
@@ -164,7 +164,7 @@ public class Bacs_state extends Fragment {
         }
 
         // Relative to the bac of chlore
-        task_chlore.execute("http://loicberthelot.freeboxos.fr/device/chlore/");
+        task_chlore.execute("http://loicberthelot.freeboxos.fr/device/chlore/","GET");
         try {
             //get when the request is finished
             String response = task_chlore.get();

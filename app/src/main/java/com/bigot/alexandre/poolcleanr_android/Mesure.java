@@ -95,7 +95,7 @@ public class Mesure extends Fragment {
         Test_connectivity task_temp = new Test_connectivity();
 
         // Relative to pH and date
-        task_ph.execute("http://loicberthelot.freeboxos.fr/device/pH/");
+        task_ph.execute("http://loicberthelot.freeboxos.fr/device/pH/","GET");
         try {
             //get when the request is finished
             String response = task_ph.get();
@@ -117,7 +117,7 @@ public class Mesure extends Fragment {
         }
 
         // Relative to Chlore
-        task_chlore.execute("http://loicberthelot.freeboxos.fr/device/Chlore/");
+        task_chlore.execute("http://loicberthelot.freeboxos.fr/device/Chlore/","GET");
         try {
             //get when the request is finished
             String response = task_chlore.get();
@@ -139,7 +139,7 @@ public class Mesure extends Fragment {
         }
 
         // Relative to temperature
-        task_temp.execute("http://loicberthelot.freeboxos.fr/device/Temperature/");
+        task_temp.execute("http://loicberthelot.freeboxos.fr/device/Temperature/","GET");
         try {
             //get when the request is finished
             String response = task_temp.get();
