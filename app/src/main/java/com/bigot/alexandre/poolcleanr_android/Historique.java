@@ -23,8 +23,6 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import static android.R.attr.id;
-
 
 public class Historique extends Fragment {
     protected LineChart mChart;
@@ -219,7 +217,7 @@ public class Historique extends Fragment {
         }
         Log.i("Request to:",url);
         ArrayList<Entry> values = new ArrayList<Entry>();
-        Test_connectivity task = new Test_connectivity();
+        Connectivity task = new Connectivity();
         task.execute(url,"GET");
         try {
             //get when the request is finished

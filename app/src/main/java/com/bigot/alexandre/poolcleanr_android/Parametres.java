@@ -4,7 +4,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,8 +56,8 @@ public class Parametres extends Fragment {
         savebutton= (Button) getView().findViewById(R.id.savebutton);
 
         //add gets
-        Test_connectivity task_user = new Test_connectivity();
-        Test_connectivity task_pool = new Test_connectivity();
+        Connectivity task_user = new Connectivity();
+        Connectivity task_pool = new Connectivity();
 
         // Relative to user data
         task_user.execute("http://loicberthelot.freeboxos.fr/user","GET");
@@ -157,8 +156,8 @@ public class Parametres extends Fragment {
 
                 save_btn.setBackgroundResource(R.drawable.mysavebutton);
 
-                Test_connectivity task_user = new Test_connectivity();
-                Test_connectivity task_pool = new Test_connectivity();
+                Connectivity task_user = new Connectivity();
+                Connectivity task_pool = new Connectivity();
 
                 JSONObject userjson= new JSONObject();
                 JSONObject pooljson= new JSONObject();

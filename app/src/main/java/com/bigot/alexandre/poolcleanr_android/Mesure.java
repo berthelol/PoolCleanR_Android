@@ -3,7 +3,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -47,8 +45,7 @@ public class Mesure extends Fragment {
         mesure_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Test_connectivity tast_order = new Test_connectivity();
-                //tast_order.execute("http://loicberthelot.freeboxos.fr/order/");
+                getMesure();
             }
         });
 
@@ -81,6 +78,7 @@ public class Mesure extends Fragment {
                 toast.show();
             }
         });
+
     }
 
     public void getMesure() {
@@ -90,9 +88,9 @@ public class Mesure extends Fragment {
         final TextView temp_output = (TextView) getView().findViewById(R.id.output_temp);
         final TextView date_output = (TextView) getView().findViewById(R.id.mesure_date);
 
-        Test_connectivity task_ph = new Test_connectivity();
-        Test_connectivity task_chlore = new Test_connectivity();
-        Test_connectivity task_temp = new Test_connectivity();
+        Connectivity task_ph = new Connectivity();
+        Connectivity task_chlore = new Connectivity();
+        Connectivity task_temp = new Connectivity();
 
         // Relative to pH and date
         task_ph.execute("http://loicberthelot.freeboxos.fr/device/pH/","GET");

@@ -129,8 +129,8 @@ public class Bacs_state extends Fragment {
         final TextView chlore_txt = (TextView) getView().findViewById(R.id.percent_chl);
         final TextView date_txt = (TextView) getView().findViewById(R.id.bac_date);
 
-        Test_connectivity task_ph = new Test_connectivity();
-        Test_connectivity task_chlore = new Test_connectivity();
+        Connectivity task_ph = new Connectivity();
+        Connectivity task_chlore = new Connectivity();
 
         // Relative to pH Moins, pH Plus and date
         task_ph.execute("http://loicberthelot.freeboxos.fr/device/pH/","GET");

@@ -25,7 +25,7 @@ import static java.lang.System.in;
  * Created by loic on 18/11/2016.
  */
 
-public class Test_connectivity extends AsyncTask<String,Void,String> {
+public class Connectivity extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... urls) {
         String request_type = urls[1];
