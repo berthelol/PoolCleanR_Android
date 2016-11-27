@@ -43,8 +43,8 @@ public class Bacs_state extends Fragment {
         levelBac_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(getContext(), "Test Test", Toast.LENGTH_SHORT);
-                toast.show();
+                //Notification notif = new Notification();
+                //notif.sendNotification("This is a Test. Thank you");
             }
         });
 
