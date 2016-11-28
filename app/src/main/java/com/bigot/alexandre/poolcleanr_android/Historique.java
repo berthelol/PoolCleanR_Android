@@ -153,6 +153,10 @@ public class Historique extends Fragment {
                 label="unknowned";
         }
 
+        if(values ==null)
+        {
+            return;
+        }
         LineDataSet set1;
 
         if (mChart.getData() != null &&
@@ -222,14 +226,14 @@ public class Historique extends Fragment {
         try {
             //get when the request is finished
             String response = task.get();
-            Log.i("Content",response);
-
             JSONArray json = new JSONArray(response);
-            Log.i("lenght:",String.valueOf(json.length()));
+            Log.i("Length",String.valueOf(json.length()));
             for(int i=0;i<json.length();i++)
             {
+                Log.i("data",String.valueOf(json.getJSONObject(i).getInt("mesure")));
                 values.add(new Entry(i,json.getJSONObject(i).getInt("mesure")));
             }
+
 
             //String mesure = json.getJSONObject(0).getString("mesure");
            // String date =json.getJSONObject(0).getString("time_of_mesure");
@@ -243,6 +247,10 @@ public class Historique extends Fragment {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+        if(values.isEmpty())
+        {
+            return null;
         }
         return values;
     }

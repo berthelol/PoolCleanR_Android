@@ -14,6 +14,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.concurrent.ExecutionException;
 
 public class Mesure extends Fragment {
@@ -87,6 +88,8 @@ public class Mesure extends Fragment {
         final TextView chlore_output =(TextView) getView().findViewById(R.id.output_chlore);
         final TextView temp_output = (TextView) getView().findViewById(R.id.output_temp);
         final TextView date_output = (TextView) getView().findViewById(R.id.mesure_date);
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(2);
 
         Connectivity task_ph = new Connectivity();
         Connectivity task_chlore = new Connectivity();
@@ -100,7 +103,7 @@ public class Mesure extends Fragment {
             Log.i("Content",response);
 
             JSONObject json = new JSONObject(response);
-            String ph_mesure = json.getString("mesure");
+            String ph_mesure = df.format(json.getDouble("mesure"));
             String date = json.getString("time_of_mesure");
 
             ph_output.setText(ph_mesure.toString());
@@ -122,7 +125,7 @@ public class Mesure extends Fragment {
             Log.i("Content",response);
 
             JSONObject json = new JSONObject(response);
-            String chlore_mesure = json.getString("mesure");
+            String chlore_mesure = df.format(json.getDouble("mesure"));
             //String date = json.getString("time_of_mesure");
 
             chlore_output.setText(chlore_mesure.toString());
@@ -144,7 +147,7 @@ public class Mesure extends Fragment {
             Log.i("Content",response);
 
             JSONObject json = new JSONObject(response);
-            String temp_mesure = json.getString("mesure");
+            String temp_mesure = df.format(json.getDouble("mesure"));
 
             temp_output.setText(temp_mesure.toString());
 
