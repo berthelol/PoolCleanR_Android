@@ -4,15 +4,15 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_measures"
-            android:icon="@drawable/ic_measures"
+            android:icon="@drawable/water"
             android:title="Mesures Piscine" />
         <item
             android:id="@+id/nav_history"
-            android:icon="@drawable/ic_history"
+            android:icon="@drawable/barchart"
             android:title="Historique" />
         <item
             android:id="@+id/nav_level_bac"
-            android:icon="@drawable/ic_level_bac"
+            android:icon="@drawable/controls"
             android:title="Etat des bacs" />
         <item
             android:id="@+id/nav_settings"

@@ -178,7 +178,10 @@ public class Bacs_state extends Fragment {
             String bacMoins = json_moins.getString("remplissage");
             JSONObject json_plus = json.getJSONObject("bacmoins");
             String bacPlus = json_plus.getString("remplissage");
-
+            if(date==null||bacMoins==null||bacPlus==null)
+            {
+                throw new Exception("message goes here");
+            }
             phMoins_txt.setText(bacMoins.toString() + "%");
             phPlus_txt.setText(bacPlus.toString() + "%");
             String dateToDisplay = date.toString();
@@ -195,6 +198,8 @@ public class Bacs_state extends Fragment {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         // Relative to the bac of chlore
@@ -207,7 +212,10 @@ public class Bacs_state extends Fragment {
             JSONObject json = new JSONObject(response);
             json = json.getJSONObject("bac");
             String bacChlore = json.getString("remplissage");
-
+            if(bacChlore==null)
+            {
+                throw new Exception("message goes here");
+            }
             chlore_txt.setText(bacChlore.toString() + "%");
             chloreProgress.setProgress(Integer.parseInt(bacChlore));
 
@@ -216,6 +224,8 @@ public class Bacs_state extends Fragment {
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
