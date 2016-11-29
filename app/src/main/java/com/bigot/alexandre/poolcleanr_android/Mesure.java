@@ -107,7 +107,10 @@ public class Mesure extends Fragment {
             String date = json.getString("time_of_mesure");
 
             ph_output.setText(ph_mesure.toString());
-            date_output.setText("relevé fait le : " + date.toString());
+            String dateToDisplay = date.toString();
+            dateToDisplay = dateToDisplay.replace('T',' ');
+            dateToDisplay = dateToDisplay.replace('Z',' ');
+            date_output.setText("relevé fait le : " + dateToDisplay);
 
         } catch (InterruptedException e) {
             e.printStackTrace();

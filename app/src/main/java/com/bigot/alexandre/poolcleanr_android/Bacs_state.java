@@ -43,6 +43,7 @@ public class Bacs_state extends Fragment {
         levelBac_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getLevelBac();
                 //Notification notif = new Notification();
                 //notif.sendNotification("This is a Test. Thank you");
             }
@@ -150,7 +151,10 @@ public class Bacs_state extends Fragment {
 
             phMoins_txt.setText(bacMoins.toString() + "%");
             phPlus_txt.setText(bacPlus.toString() + "%");
-            date_txt.setText("relevé fait le : " + date.toString());
+            String dateToDisplay = date.toString();
+            dateToDisplay = dateToDisplay.replace('T',' ');
+            dateToDisplay = dateToDisplay.replace('Z',' ');
+            date_txt.setText("relevé fait le : " + dateToDisplay);
 
             moinsProgress.setProgress(Integer.parseInt(bacMoins));
             plusProgress.setProgress(Integer.parseInt(bacPlus));
