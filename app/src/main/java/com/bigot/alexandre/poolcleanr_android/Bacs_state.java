@@ -116,7 +116,7 @@ public class Bacs_state extends Fragment {
                 new AlertDialog.Builder(getContext())
                         .setTitle("Bac de Chlore")
                         .setMessage("Souhaitez-vous ouvrir le bac de chlore ?")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(android.R.string.yes,  new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // Demande d'ouverture du bac de Chlore
                                 JSONObject bacChlore_json= new JSONObject();
