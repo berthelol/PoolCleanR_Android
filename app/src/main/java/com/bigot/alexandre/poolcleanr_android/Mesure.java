@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutionException;
 public class Mesure extends Fragment {
 
     public final CharSequence toast_info_ph = "Le pH mesure l'acidité d'un liquide. Il est compris entre 0 et 14. L'eau d'une piscine a idéalement un pH compris entre 7 et 7,5.";
-    public final CharSequence toast_info_chlore = "Le taux de chlore d'une piscine doit être compris entre 40% et 60%.";
+    public final CharSequence toast_info_chlore = "Le taux de chlore d'une piscine doit être compris entre 1,2 et 1,5 mg/Litre d'eau.";
     public final CharSequence toast_info_temp = "Vous êtes libres de déterminer la température optimale de votre piscine.";
 
     @Nullable
