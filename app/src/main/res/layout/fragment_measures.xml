@@ -102,7 +102,7 @@
                 android:id="@+id/icon_info_ph"
                 android:layout_weight="1"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="30dp"/>
+                android:layout_marginLeft="35dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -137,7 +137,7 @@
                 android:id="@+id/icon_info_chlore"
                 android:layout_weight="1"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="30dp"/>
+                android:layout_marginLeft="45dp"/>
 
         </LinearLayout>
     </LinearLayout>

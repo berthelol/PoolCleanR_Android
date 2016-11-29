@@ -113,6 +113,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_settings:
                 fragment = new Parametres();
                 break;
+            case R.id.nav_apropos:
+                fragment = new Apropos();
+                break;
             default:
                 fragment = new Mesure();
 
