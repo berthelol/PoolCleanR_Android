@@ -44,7 +44,7 @@ public class Parametres extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
         getActivity().setTitle("Parametres");
-    numberpicker = (NumberPicker) getView().findViewById(R.id.numberPicker);
+        numberpicker = (NumberPicker) getView().findViewById(R.id.numberPicker);
         numberpicker.setMaxValue(100);
         numberpicker.setMinValue(0);
 
