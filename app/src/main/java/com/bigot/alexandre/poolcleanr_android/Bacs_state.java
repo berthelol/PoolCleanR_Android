@@ -57,22 +57,39 @@ public class Bacs_state extends Fragment {
 
                 final CharSequence[] items = {"pH -", "pH +"};
 
+                final Connectivity task_bacPH = new Connectivity();
+
                 new AlertDialog.Builder(getContext())
                         .setTitle("Bac de pH")
-                        //.setMessage("Souhaitez-vous ouvrir le bac de pH ?")
+                        .setMessage("Souhaitez-vous ouvrir un bac de pH ?")
+                        /*
+                        // Radio Button pH plus et pH moins
                         .setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface arg0, int arg1) {
                                 Toast toast = Toast.makeText(getContext(), items[arg1], Toast.LENGTH_LONG);
                                 toast.show();
                             }
-                        })
+                        })*/
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
+                                /*
                                 // Demande d'ouverture du bac de pH à la Raspberry
                                 // La quantité nécessaire pour un retour à la normale doit être calculé (côté Raspberry ?)
                                 int selected = ((AlertDialog)dialog).getListView().getSelectedItemPosition();
                                 Toast toast = Toast.makeText(getContext(), "Selectionnné : " + selected, Toast.LENGTH_LONG);
+                                toast.show();
+                                */
+                                JSONObject bacPH_json= new JSONObject();
+                                try {
+                                    bacPH_json.put("ordername","openbacph");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                task_bacPH.execute("http://loicberthelot.freeboxos.fr/order","POST",bacPH_json.toString());
+
+                                // Toast d'information
+                                Toast toast = Toast.makeText(getContext(), "Ouverture d'un bac de pH", Toast.LENGTH_LONG);
                                 toast.show();
                             }
                         })
@@ -94,12 +111,25 @@ public class Bacs_state extends Fragment {
             @Override
             public void onClick(View v) {
 
+                final Connectivity task_bacChlore = new Connectivity();
+
                 new AlertDialog.Builder(getContext())
                         .setTitle("Bac de Chlore")
                         .setMessage("Souhaitez-vous ouvrir le bac de chlore ?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // Demande d'ouverture du bac de Chlore
+                                JSONObject bacChlore_json= new JSONObject();
+                                try {
+                                    bacChlore_json.put("ordername","openbacchlore");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                task_bacChlore.execute("http://loicberthelot.freeboxos.fr/order","POST",bacChlore_json.toString());
+
+                                // Toast d'information
+                                Toast toast = Toast.makeText(getContext(), "Ouverture du bac de chlore", Toast.LENGTH_LONG);
+                                toast.show();
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
