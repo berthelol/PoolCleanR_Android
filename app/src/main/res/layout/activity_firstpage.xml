@@ -1,0 +1,43 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0099cc"
+    tools:context="com.bigot.alexandre.poolcleanr_android.Firstpage"
+    android:id="@+id/screen_init">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+
+    <TextView
+        android:text="Votre assistant pisciniste"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView6"
+        android:fontFamily="casual"
+        android:textColor="@android:color/white"
+        android:textSize="25sp"
+        android:layout_marginTop="350dp"
+        android:layout_marginLeft="30dp" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:fitsSystemWindows="true"
+        android:layout_height="500sp">
+
+    </FrameLayout>
+
+    <ImageView
+        android:layout_width="187dp"
+        android:layout_height="196dp"
+        app:srcCompat="@mipmap/poolcleanr"
+        android:id="@+id/imageView2"
+        android:layout_marginLeft="85dp"
+        android:layout_marginTop="150dp" />
+
+</FrameLayout>

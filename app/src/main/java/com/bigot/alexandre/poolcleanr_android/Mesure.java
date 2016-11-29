@@ -129,10 +129,8 @@ public class Mesure extends Fragment {
 
             JSONObject json = new JSONObject(response);
             String chlore_mesure = df.format(json.getDouble("mesure"));
-            //String date = json.getString("time_of_mesure");
 
             chlore_output.setText(chlore_mesure.toString());
-            //date_output.setText("relevé fait le : " + date.toString());
 
         } catch (InterruptedException e) {
             e.printStackTrace();

@@ -5,4 +5,6 @@
     <color name="colorAccent">#FF1A75</color>
     <color name="bleuciel">#9EDEFA</color>
     <color name="blueumoyen">#1b6fe3</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>
