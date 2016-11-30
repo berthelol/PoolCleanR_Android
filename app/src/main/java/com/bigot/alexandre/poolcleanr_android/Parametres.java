@@ -60,7 +60,8 @@ public class Parametres extends Fragment {
         Connectivity task_pool = new Connectivity();
 
         // Relative to user data
-        task_user.execute("http://loicberthelot.freeboxos.fr/user","GET");
+        //task_user.execute("http://loicberthelot.freeboxos.fr/user","GET");
+        task_user.execute(MainActivity.path_server + "user","GET");
         try {
             //get when the request is finished
             String response = task_user.get();
@@ -83,7 +84,8 @@ public class Parametres extends Fragment {
         }
 
         // Relative to pool data
-        task_pool.execute("http://loicberthelot.freeboxos.fr/user/pool","GET");
+        //task_pool.execute("http://loicberthelot.freeboxos.fr/user/pool","GET");
+        task_pool.execute(MainActivity.path_server + "user/pool","GET");
         try {
             //get when the request is finished
             String response = task_pool.get();
@@ -173,9 +175,10 @@ public class Parametres extends Fragment {
                     e.printStackTrace();
                 }
 
-
-                task_user.execute("http://loicberthelot.freeboxos.fr/user","POST",userjson.toString());
-                task_pool.execute("http://loicberthelot.freeboxos.fr/user/pool","POST",pooljson.toString());
+                //task_user.execute("http://loicberthelot.freeboxos.fr/user","POST",userjson.toString());
+                task_user.execute(MainActivity.path_server + "user","POST",userjson.toString());
+                //task_pool.execute("http://loicberthelot.freeboxos.fr/user/pool","POST",pooljson.toString());
+                task_pool.execute(MainActivity.path_server + "user/pool","POST",pooljson.toString());
 
                 Toast toast = Toast.makeText(getContext(), "Modifications saved", Toast.LENGTH_SHORT);
                 toast.show();

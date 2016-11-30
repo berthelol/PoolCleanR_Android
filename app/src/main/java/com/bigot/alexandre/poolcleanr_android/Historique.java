@@ -204,7 +204,8 @@ public class Historique extends Fragment {
     }
     public ArrayList<Entry> askForHistory(int id)
     {
-        String url =   "http://loicberthelot.freeboxos.fr/device/";
+        //String url =   "http://loicberthelot.freeboxos.fr/device/";
+        String url =   MainActivity.path_server + "device/";
         switch (id)
         {
             case R.id.graph_pH:

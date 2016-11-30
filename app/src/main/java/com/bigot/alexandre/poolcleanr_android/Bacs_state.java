@@ -28,7 +28,6 @@ public class Bacs_state extends Fragment {
         return inflater.inflate(R.layout.fragment_bac_level, container, false);
     }
 
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -86,7 +85,8 @@ public class Bacs_state extends Fragment {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                task_bacPH.execute("http://loicberthelot.freeboxos.fr/order","POST",bacPH_json.toString());
+                                //task_bacPH.execute("http://loicberthelot.freeboxos.fr/order","POST",bacPH_json.toString());
+                                task_bacPH.execute(MainActivity.path_server + "order","POST",bacPH_json.toString());
 
                                 // Toast d'information
                                 Toast toast = Toast.makeText(getContext(), "Ouverture d'un bac de pH", Toast.LENGTH_LONG);
@@ -125,7 +125,8 @@ public class Bacs_state extends Fragment {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                task_bacChlore.execute("http://loicberthelot.freeboxos.fr/order","POST",bacChlore_json.toString());
+                                //task_bacChlore.execute("http://loicberthelot.freeboxos.fr/order","POST",bacChlore_json.toString());
+                                task_bacChlore.execute(MainActivity.path_server + "order","POST",bacChlore_json.toString());
 
                                 // Toast d'information
                                 Toast toast = Toast.makeText(getContext(), "Ouverture du bac de chlore", Toast.LENGTH_LONG);
@@ -164,7 +165,8 @@ public class Bacs_state extends Fragment {
         Connectivity task_chlore = new Connectivity();
 
         // Relative to pH Moins, pH Plus and date
-        task_ph.execute("http://loicberthelot.freeboxos.fr/device/pH/","GET");
+        //task_ph.execute("http://loicberthelot.freeboxos.fr/device/pH/","GET");
+        task_ph.execute(MainActivity.path_server + "device/pH/","GET");
         try {
             //get when the request is finished
             String response = task_ph.get();
@@ -203,7 +205,8 @@ public class Bacs_state extends Fragment {
         }
 
         // Relative to the bac of chlore
-        task_chlore.execute("http://loicberthelot.freeboxos.fr/device/chlore/","GET");
+        //task_chlore.execute("http://loicberthelot.freeboxos.fr/device/chlore/","GET");
+        task_chlore.execute(MainActivity.path_server + "device/chlore/","GET");
         try {
             //get when the request is finished
             String response = task_chlore.get();

@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String TAG = "MainActivity";
+    public static final String path_server = "http://loicberthelot.freeboxos.fr/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
