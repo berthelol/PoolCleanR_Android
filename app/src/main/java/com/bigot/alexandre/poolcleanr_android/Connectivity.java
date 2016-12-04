@@ -41,8 +41,6 @@ public class Connectivity extends AsyncTask<String,Void,String> {
         {
             url = new URL(urls[0]);
 
-
-
             if(request_type=="POST")
             {
                 urlconnection =(HttpURLConnection) url.openConnection();
@@ -95,6 +93,10 @@ public class Connectivity extends AsyncTask<String,Void,String> {
         }catch (IOException e)
         {
             e.printStackTrace();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return null;
         }
         return null;
     }
