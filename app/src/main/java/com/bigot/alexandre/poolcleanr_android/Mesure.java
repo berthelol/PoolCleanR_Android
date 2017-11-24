@@ -98,9 +98,6 @@ public class Mesure extends Fragment {
         // Relative to pH and date
         //task_ph.execute("http://loicberthelot.freeboxos.fr/device/pH/","GET");
         task_ph.execute(MainActivity.path_server + "device/pH/","GET");
-
-
-
         try {
             //get when the request is finished
             String response = task_ph.get();
